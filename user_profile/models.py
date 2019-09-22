@@ -17,7 +17,7 @@ class Order(models.Model):
     description=models.TextField()
     deadline=models.DateTimeField(default=timezone.now())
     price=models.IntegerField(null=True,validators=[MinValueValidator(1),])
-
+    paid=models.BooleanField(default=False)
     class Meta:
         ordering=('-created',)
 
@@ -25,3 +25,12 @@ class Order(models.Model):
         return reverse('order',args=[
             self.pk,
         ])
+
+    def display_first_name(self):
+        return 
+    display_first_name
+    def display_last_name(self):
+        pass
+    
+    def dispaly_email(self):
+        pass

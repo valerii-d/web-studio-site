@@ -20,8 +20,7 @@ def register(request):
 @login_required
 def orders(request):
     if request.method=='POST':
-        pass
-        
+        pass    
     else:
         orders_list=Order.objects.all()
         paginator=Paginator(orders_list,2)
@@ -48,7 +47,7 @@ def order(request):
     return render(request,'user_profile/order.html',{'form':order_form})
 
 @login_required
-def order(request,id):
+def revoke_order(request,id):
     order=get_object_or_404(Order,pk=id)
     if request.method=="POST":
         order.status='deviation'

@@ -8,6 +8,6 @@ urlpatterns=[
     path('login/',LoginView.as_view(), name='login'),
     path('logout/',LogoutView.as_view(), name='logout'),
     path('orders/',views.orders,name='orders'),
-    path('order/',views.order, name='order'),
-    path('order/<int:id>/',views.order,name='order'),
+    path('order/',views.order, name='create_order'),
+    path('order/<int:id>/',views.revoke_order,name="order"),
 ]

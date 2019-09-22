@@ -5,7 +5,7 @@
 
 {% block content %}
 
-<a href="{% url 'order' %}">Add order</a>
+<a href="{% url 'create_order' %}">Add order</a>
 
 {% if orders %}
     <table>
@@ -13,6 +13,7 @@
         <th>Status</th>
         <th>Price</th>
         <th>Deadline</th>
+        <th>Paid</th>
         <th>Actions</th>
         {% for order in orders %}
             <tr>
@@ -24,6 +25,13 @@
                     <td>-</td>
                 {% endif %}
                 <td>{{order.deadline}}</td>
+                <td>
+                    {% if order.paid %}
+                        +
+                    {% else %}
+                        - 
+                    {% endif %}
+                </td>
                 <td>
                     <a href="{{order.get_absolute_url}}">Detail</a>
                     {% if order.status == 'processing' %}

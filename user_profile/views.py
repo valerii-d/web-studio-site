@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from .forms import UserRegistrationForm, OrderCreationForm
 from .models import Order
@@ -46,3 +46,8 @@ def order(request):
     else:
         order_form=OrderCreationForm()
     return render(request,'user_profile/order.html',{'form':order_form})
+
+@login_required
+def order_detail(request,id):
+    order=get_object_or_404(Order,pk=id)
+    return render(request,'user_profile/detail.html',{'order':order})

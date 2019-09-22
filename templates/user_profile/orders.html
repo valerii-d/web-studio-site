@@ -24,7 +24,9 @@
                     <td>-</td>
                 {% endif %}
                 <td>{{order.deadline}}</td>
-                <td>Actions</td>
+                <td>
+                    <a href="{{order.get_absolute_url}}">Detail</a>
+                </td>
             </tr>
         {% endfor %}
     </table>

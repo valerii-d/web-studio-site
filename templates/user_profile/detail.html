@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+
+
+{% block title %}Order{% endblock %}
+
+{% block content %}
+    Description:
+    <div  style="width: 900px;word-wrap: break-word;">
+        {{ order.description|linebreaks }}
+    </div>
+<a href="{% url 'orders' %}">Back</a>
+
+{% endblock %}

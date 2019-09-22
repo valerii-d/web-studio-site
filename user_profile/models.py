@@ -2,6 +2,8 @@ from django.db import models
 from django.contrib.auth.models import User
 from django.core.validators import MinValueValidator
 from django.utils import timezone
+from django.urls import reverse
+
 class Order(models.Model):
     STATUS_CHOICES=(
         ('processing','Processing'),
@@ -18,3 +20,8 @@ class Order(models.Model):
 
     class Meta:
         ordering=('-created',)
+
+    def get_absolute_url(self):
+        return reverse('order_detail',args=[
+            self.pk,
+        ])

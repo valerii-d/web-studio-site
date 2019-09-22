@@ -28,7 +28,10 @@
             </tr>
         {% endfor %}
     </table>
+
+{% include  'pagination.html' with page=orders %}
+
 {% else %}
-    <p>Table is empty.</p>
+    <p>No orders.</p>
 {% endif %}
 {% endblock %}

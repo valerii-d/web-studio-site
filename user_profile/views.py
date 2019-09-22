@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from .forms import UserRegistrationForm, OrderCreationForm
 from .models import Order
-
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
 def register(request):
     if request.method=='POST':
@@ -23,7 +23,15 @@ def orders(request):
         pass
         
     else:
-        orders=Order.objects.all()
+        orders_list=Order.objects.all()
+        paginator=Paginator(orders_list,2)
+        page=request.GET.get('page')
+        try:
+            orders=paginator.page(page)
+        except PageNotAnInteger:
+            orders=paginator.page(1)
+        except EmptyPage:
+            orders=paginator.page(paginator.num_pages)
     return render(request,'user_profile/orders.html',{'orders':orders})
 
 @login_required

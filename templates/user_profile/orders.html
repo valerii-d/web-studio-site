@@ -1,5 +1,34 @@
 {% extends "base.html" %}
 
+
+{% block title %}Orders{% endblock %}
+
 {% block content %}
-<p>Orders</p>
+
+<a href="{% url 'order' %}">Add order</a>
+
+{% if orders %}
+    <table>
+        <th>Date</th>
+        <th>Status</th>
+        <th>Price</th>
+        <th>Deadline</th>
+        <th>Actions</th>
+        {% for order in orders %}
+            <tr>
+                <td>{{order.created}}</td>
+                <td>{{order.status}}</td>
+                {% if order.price %}
+                    <td>{{order.price}}</td>
+                {% else %}
+                    <td>-</td>
+                {% endif %}
+                <td>{{order.deadline}}</td>
+                <td>Actions</td>
+            </tr>
+        {% endfor %}
+    </table>
+{% else %}
+    <p>Table is empty.</p>
+{% endif %}
 {% endblock %}

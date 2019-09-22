@@ -1,6 +1,8 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
-from .forms import UserRegistrationForm
+from .forms import UserRegistrationForm, OrderCreationForm
+from .models import Order
+
 
 def register(request):
     if request.method=='POST':
@@ -17,4 +19,22 @@ def register(request):
 
 @login_required
 def orders(request):
-    return render(request,'user_profile/orders.html',{'1':1})
+    if request.method=='POST':
+        pass
+        
+    else:
+        orders=Order.objects.all()
+    return render(request,'user_profile/orders.html',{'orders':orders})
+
+@login_required
+def order(request):
+    if request.method=='POST':
+       order_form=OrderCreationForm(request.POST)
+       if order_form.is_valid():
+           new_order=order_form.save(commit=False)
+           new_order.user=request.user
+           new_order.save()
+           return redirect('orders')
+    else:
+        order_form=OrderCreationForm()
+    return render(request,'user_profile/order.html',{'form':order_form})

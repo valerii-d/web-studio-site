@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+
+{% block title %}Order{% endblock %}
+
+{% block content %}
+    <form action="{% url 'order' %}" method="POST">
+        {% csrf_token %}
+        {{form.as_p}}
+        <input type="submit" value="Add">
+    </form>
+    <a href="{% url 'orders' %}">Cancel</a>
+{% endblock %}

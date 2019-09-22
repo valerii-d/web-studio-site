@@ -1,5 +1,6 @@
 from django import forms
 from django.contrib.auth.models import User
+from .models import Order
 
 class UserRegistrationForm(forms.ModelForm): 
     first_name=forms.CharField(label='First name',required=True)
@@ -17,3 +18,9 @@ class UserRegistrationForm(forms.ModelForm):
         if cd['password']!=cd['password2']:
             raise forms.ValidationError('Password don\'t match.')
         return cd['password2']
+
+
+class OrderCreationForm(forms.ModelForm):
+    class Meta:
+        model=Order
+        fields=('description','deadline')

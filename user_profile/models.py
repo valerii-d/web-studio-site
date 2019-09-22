@@ -22,6 +22,6 @@ class Order(models.Model):
         ordering=('-created',)
 
     def get_absolute_url(self):
-        return reverse('order_detail',args=[
+        return reverse('order',args=[
             self.pk,
         ])

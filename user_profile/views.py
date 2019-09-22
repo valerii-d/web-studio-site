@@ -48,6 +48,12 @@ def order(request):
     return render(request,'user_profile/order.html',{'form':order_form})
 
 @login_required
-def order_detail(request,id):
+def order(request,id):
     order=get_object_or_404(Order,pk=id)
-    return render(request,'user_profile/detail.html',{'order':order})
+    if request.method=="POST":
+        order.status='deviation'
+        order.save()
+        return redirect('orders')
+    else:
+        return render(request,'user_profile/detail.html',{'order':order})
+

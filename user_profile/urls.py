@@ -9,5 +9,5 @@ urlpatterns=[
     path('logout/',LogoutView.as_view(), name='logout'),
     path('orders/',views.orders,name='orders'),
     path('order/',views.order, name='order'),
-    path('order/<int:id>/',views.order_detail,name='order_detail')
+    path('order/<int:id>/',views.order,name='order'),
 ]

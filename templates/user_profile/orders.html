@@ -26,6 +26,12 @@
                 <td>{{order.deadline}}</td>
                 <td>
                     <a href="{{order.get_absolute_url}}">Detail</a>
+                    {% if order.status == 'processing' %}
+                        <form action="{{order.get_absolute_url}}" method="POST">
+                            {% csrf_token %}
+                            <input type="submit" value="Revoke">
+                        </form>
+                    {% endif %}
                 </td>
             </tr>
         {% endfor %}

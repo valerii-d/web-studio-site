@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+
+{% block title %}Create a profile{% endblock %}
+
+{% block content %}
+    <form action="{% url 'register' %}" method="POST">
+        {% csrf_token %}
+        {{form.as_p}}
+        <p><input type="submit" value="Register"></p>
+    </form>
+{% endblock %}

@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'user_profile',
 ]
 
 MIDDLEWARE = [
@@ -119,4 +120,9 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
-LOGIN_REDIRECT_URL='profile/orders/'
+
+from django.urls import reverse_lazy
+
+LOGIN_REDIRECT_URL=reverse_lazy('orders')
+LOGIN_URL=reverse_lazy('login')
+LOGOUT_URL=reverse_lazy('logout')

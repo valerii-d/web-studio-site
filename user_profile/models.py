@@ -18,19 +18,15 @@ class Order(models.Model):
     deadline=models.DateTimeField(default=timezone.now())
     price=models.IntegerField(null=True,validators=[MinValueValidator(1),])
     paid=models.BooleanField(default=False)
+
+    def __str__(self):
+        return  self.created.strftime('%H:%M:%S %d.%m.%Y ')+self.user.email
     class Meta:
         ordering=('-created',)
+        verbose_name='Order'
+        verbose_name_plural='Orders'
 
     def get_absolute_url(self):
         return reverse('order',args=[
             self.pk,
         ])
-
-    def display_first_name(self):
-        return 
-    display_first_name
-    def display_last_name(self):
-        pass
-    
-    def dispaly_email(self):
-        pass

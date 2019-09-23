@@ -1,12 +1,18 @@
-{% extends "base.html" %}
+{% extends "form_template.html" %}
+
+{% load crispy_forms_tags %}
 
 {% block title %}Order{% endblock %}
 
-{% block content %}
-    <form action="{% url 'create_order' %}" method="POST">
-        {% csrf_token %}
-        {{form.as_p}}
-        <input type="submit" value="Add">
-    </form>
-    <a href="{% url 'orders' %}">Cancel</a>
+{% block header %}Create order{% endblock %}
+
+{% block form %}
+<form action="{% url 'create_order' %}" method="POST" >
+    {% csrf_token %}
+    {{form|crispy}}
+    <div class="row justify-content-center">
+        <a class="btn btn-danger btn-lg mr-4 mb-2" href="{% url 'orders' %}">Cancel</a>
+        <input type="submit" class="btn btn-success btn-lg mb-2" value="Submit">
+    <div>
+</form>
 {% endblock %}

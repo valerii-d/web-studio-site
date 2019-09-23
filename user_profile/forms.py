@@ -1,7 +1,6 @@
 from django import forms
 from django.contrib.auth.models import User
 from .models import Order
-
 class UserRegistrationForm(forms.ModelForm): 
     first_name=forms.CharField(label='First name',required=True)
     last_name=forms.CharField(label='Last name',required=True)
@@ -19,10 +18,12 @@ class UserRegistrationForm(forms.ModelForm):
             raise forms.ValidationError('Password don\'t match.')
         return cd['password2']
 
-
 class OrderCreationForm(forms.ModelForm):
     class Meta:
         model=Order
         fields=('description','deadline')
+        widgets={
+            'deadline':forms.DateTimeInput(attrs={'class':'datepicker'}),
+        }
 
 

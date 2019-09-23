@@ -24,3 +24,4 @@ class OrderAdmin(admin.ModelAdmin):
         return False
 
 admin.site.register(Order,OrderAdmin)
+admin.site.site_header="My administration"

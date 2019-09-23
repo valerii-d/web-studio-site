@@ -21,3 +21,9 @@
     color: #e3f2fd;
     text-shadow: blue 0 0 2px;
 }
+.navbar-header:hover{
+    color:  #e3f2fd;
+}
+.navbar-a{
+   outline: none;
+}

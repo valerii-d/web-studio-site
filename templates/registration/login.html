@@ -1,13 +1,17 @@
-{% extends "base.html" %}
+{% extends "form.html" %}
+
+{% load crispy_forms_tags %}
 
 {% block title %}Login{% endblock %}
 
-{% block content %}
+{% block header %}Login{% endblock %}
 
-<form method="post" action="{% url 'login' %}">
-{% csrf_token %}
-{{form.as_p}}
-<input type="hidden" name="next" value="{{ next }}" />
-<input type="submit" value="login" />
+{% block form %}
+<form method="POST" action="{% url 'login' %}">
+    {% csrf_token %}
+    {{form|crispy}}
+    <div class="row justify-content-center">
+        <input type="submit" class="btn btn-success btn-lg mb-2" value="Login">
+    <div>
 </form>
 {% endblock %}

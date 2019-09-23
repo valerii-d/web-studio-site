@@ -1,13 +1,34 @@
 {% load static %}
 <nav class="navbar navbar-light nav-col navbar-shadow">
-    <a class="navbar-brand ml-4" href="/">
+    <a class="navbar-brand ml-4 navbar-a" href="/">
         <img src="{% static 'images/home.svg' %}" alt="home" class="d-inline block align-top">
      <h1 class="navbar-header">Web studio</h1>
     </a>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  Dropdown
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                  <a class="dropdown-item" href="#">Action</a>
+                  <a class="dropdown-item" href="#">Another action</a>
+                  <div class="dropdown-divider"></div>
+                  <a class="dropdown-item" href="#">Something else here</a>
+                </div>
+
+    </div>
     <ul class="nav justify-content-end">
         {% if request.user.is_authenticated %}
-        <li class="nav-item mr-4">
-            <a href="{% url 'logout' %}" class="btn btn-outline-danger btn-lg">Logout</a>
+        <li class="nav-item dropdown mr-4">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Profile
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <a class="dropdown-item" href="{% url 'create_order' %}">Create order</a>
+            <a class="dropdown-item" href="{% url 'orders' %}">Show orders</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="{% url 'logout' %}">Logout</a>
+            </div>
         </li>
         {% else %}
             <li class="nav-item mr-4">

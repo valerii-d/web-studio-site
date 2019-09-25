@@ -1,53 +1,59 @@
-{% extends "base.html" %}
+{% extends "form.html" %}
 
+{% load static %}
 
 {% block title %}Orders{% endblock %}
 
-{% block content %}
+{% block header %}Orders{% endblock %}
 
-<a href="{% url 'create_order' %}">Add order</a>
+{% block form %}
 
 {% if orders %}
-    <table>
+    <a href="{% url 'create_order' %}" class="btn  btn-primary mb-4">Add order</a>
+    <table class="table-bordered table">
         <th>Date</th>
         <th>Status</th>
-        <th>Price</th>
+        <th>Price($)</th>
         <th>Deadline</th>
         <th>Paid</th>
         <th>Actions</th>
         {% for order in orders %}
             <tr>
                 <td>{{order.created}}</td>
-                <td>{{order.status}}</td>
+                <td id='status'>{{order.status}}</td>
                 {% if order.price %}
                     <td>{{order.price}}</td>
                 {% else %}
-                    <td>-</td>
+                    <td>
+                        <img src="{% static 'images/no.svg' %}" alt="-" class="t-img">
+                    </td>
                 {% endif %}
                 <td>{{order.deadline}}</td>
                 <td>
                     {% if order.paid %}
-                        +
+                        <img src="{% static 'images/ok.svg' %}" alt="+" class="t-img">
                     {% else %}
-                        - 
+                        <img src="{% static 'images/no.svg' %}" alt="-" class="t-img">
                     {% endif %}
                 </td>
                 <td>
-                    <a href="{{order.get_absolute_url}}">Detail</a>
+                    <a href="{{order.get_absolute_url}}" class="btn btn-link btn-detail">Detail</a>
                     {% if order.status == 'processing' %}
                         <form action="{{order.get_absolute_url}}" method="POST">
                             {% csrf_token %}
-                            <input type="submit" value="Revoke">
+                            <input type="submit" value="Revoke" class="btn btn-link btn-revoke">
                         </form>
                     {% endif %}
                 </td>
             </tr>
         {% endfor %}
     </table>
-
 {% include  'pagination.html' with page=orders %}
 
 {% else %}
-    <p>No orders.</p>
+<div class="row justify-content-center">
+    <p>No orders.But you can easily change it 😉</p><br>
+    <a href="{% url 'create_order' %}" class="btn  btn-primary mb-4">Add order</a>
+<div>
 {% endif %}
 {% endblock %}

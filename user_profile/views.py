@@ -40,6 +40,7 @@ def order(request):
        if order_form.is_valid():
            new_order=order_form.save(commit=False)
            new_order.user=request.user
+           new_order.deadline=order_form.cleaned_data['deadline']
            new_order.save()
            return redirect('orders')
     else:

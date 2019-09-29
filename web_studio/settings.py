@@ -130,3 +130,4 @@ from django.urls import reverse_lazy
 LOGIN_REDIRECT_URL=reverse_lazy('orders')
 LOGIN_URL=reverse_lazy('login')
 LOGOUT_URL=reverse_lazy('logout')
+

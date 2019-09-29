@@ -51,9 +51,19 @@
 {% include  'pagination.html' with page=orders %}
 
 {% else %}
-<div class="row justify-content-center">
-    <p>No orders.But you can easily change it 😉</p><br>
-    <a href="{% url 'create_order' %}" class="btn  btn-primary mb-4">Add order</a>
-<div>
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-auto">
+            <p>No orders.But you can easily change it 😉</p>
+        </div>
+    <div>
+</div>
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-auto">
+            <a href="{% url 'create_order' %}" class="btn  btn-primary mb-4">Add order</a>
+        </div>
+    <div>
+</div>
 {% endif %}
 {% endblock %}

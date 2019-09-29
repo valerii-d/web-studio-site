@@ -1,6 +1,9 @@
 from django import forms
 from django.contrib.auth.models import User
 from .models import Order
+from django.utils import timezone
+from .validators import validate_deadline
+
 class UserRegistrationForm(forms.ModelForm): 
     first_name=forms.CharField(label='First name',required=True)
     last_name=forms.CharField(label='Last name',required=True)
@@ -19,11 +22,10 @@ class UserRegistrationForm(forms.ModelForm):
         return cd['password2']
 
 class OrderCreationForm(forms.ModelForm):
+
+    deadline=forms.DateTimeField(label='Deadline',widget=forms.DateTimeInput,validators=(validate_deadline,),initial=timezone.now())
+
     class Meta:
         model=Order
-        fields=('description','deadline')
-        widgets={
-            'deadline':forms.DateTimeInput(attrs={'class':'datepicker'}),
-        }
-
+        fields=('description',)
 

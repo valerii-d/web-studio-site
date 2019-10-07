@@ -1,17 +1,29 @@
-{% extends "form.html" %}
+{% extends "index.html" %}
 
-{% load crispy_forms_tags %}
+{% load static %}
 
-{% block title %}Create a profile{% endblock %}
+{% block title %}Sign Up{% endblock %}
 
-{% block header %}Create a profile{% endblock %}
 
-{% block form %}
-    <form action="{% url 'register' %}" method="POST">
-        {% csrf_token %}
-        {{form|crispy}}
-        <div class="row justify-content-center">
-            <input type="submit" class="btn btn-success btn-lg" value="Register">
-        <div>
-    </form>
+{% block content %}
+<link rel="stylesheet" href="{% static 'css/sign_up.css' %}">
+<div class="sign_in_wrapper">
+    <div class="sign_in_form">
+      <h2>Pied Piper Sign Up</h2>
+      <hr>
+      <form action="{% url 'register' %}" method="POST">
+          {% csrf_token %}
+          {% for field in form %}
+          {{ form.non_field_errors }}
+          <div class="email_field">
+              {{ field.errors }}
+              {{field}}
+          </div>
+          {% endfor %}
+          <div class="submit_button">
+            <input type="submit" value="Submit" class="buton buton-bg">
+          </div>
+      </form>
+    </div>
+  </div>
 {% endblock %}

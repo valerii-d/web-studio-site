@@ -1,0 +1,68 @@
+body {
+  font-family: 'Poppins', sans-serif;
+  color: #343434;
+  font-weight: 400;
+  background-image: url('../img/back.jpg');
+}
+
+
+.sign_in_wrapper {
+  margin: 11% auto;
+  width: 50%;
+  border-style: solid;
+  border-width: 1px;
+  border-radius: 10px;
+  opacity: 0.9;
+  background-color: #f2f2f2;
+}
+
+.sign_in_form {
+  margin: 5% auto;
+  padding: 2% 2%;
+  height: auto;
+  width: 90%;
+}
+
+.sign_in_form h2 {
+  text-align: center;
+}
+
+.sign_in_form hr {
+      border-top: 1px solid grey;
+}
+
+.submit_button {
+  text-align: left;
+}
+
+.submit_button input {
+  padding: 2% 2%;
+  font-size: 15px !important;
+}
+
+.sign_in_form table {
+  margin-top: 5%;
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.sign_in_form th, td {
+  padding: 8px;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+}
+
+.sign_in_form tr:hover {background-color:#f5f5f5;}
+
+.pages ul {
+  margin: 2% auto 0 auto;
+  width: 30%;
+  text-align: center;
+}
+
+.pages ul li {
+  margin-left: 1%;
+  font-size: 15px;
+  display: inline;
+  list-style-type: none;
+}

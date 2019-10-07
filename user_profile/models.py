@@ -17,7 +17,7 @@ class Order(models.Model):
     user=models.ForeignKey(User,related_name='orders',on_delete=models.CASCADE)
     status=models.CharField(max_length=11, choices=STATUS_CHOICES,default='processing')
     description=models.TextField()
-    deadline=models.DateTimeField(default=timezone.now)
+    deadline=models.DateTimeField()
     price=models.IntegerField(null=True,validators=[MinValueValidator(1),])
     paid=models.BooleanField(default=False)
     created=models.DateTimeField(auto_now_add=True)

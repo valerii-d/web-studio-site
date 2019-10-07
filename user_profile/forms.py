@@ -3,13 +3,15 @@ from django.contrib.auth.models import User
 from .models import Order
 from django.utils import timezone
 from .validators import validate_deadline
+from django.contrib.auth.forms import AuthenticationForm
 
-class UserRegistrationForm(forms.ModelForm): 
-    first_name=forms.CharField(label='First name',required=True)
-    last_name=forms.CharField(label='Last name',required=True)
-    email=forms.EmailField(label='Email',widget=forms.EmailInput,required=True)
-    password=forms.CharField(label='Password',widget=forms.PasswordInput,required=True)
-    password2=forms.CharField(label='Reapeat password',widget=forms.PasswordInput,required=True)
+class UserRegistrationForm(forms.ModelForm):
+    username=forms.CharField(label='Username',required=True,widget=forms.TextInput(attrs={'placeholder': 'Username'})) 
+    first_name=forms.CharField(label='First name',required=True,widget=forms.TextInput(attrs={'placeholder': 'First name'}))
+    last_name=forms.CharField(label='Last name',required=True,widget=forms.TextInput(attrs={'placeholder': 'Last name'}))
+    email=forms.EmailField(label='Email',required=True,widget=forms.EmailInput(attrs={'placeholder': 'Email'}))
+    password=forms.CharField(label='Password',required=True,widget=forms.PasswordInput(attrs={'placeholder': 'Password'}))
+    password2=forms.CharField(label='Reapeat password',required=True,widget=forms.PasswordInput(attrs={'placeholder': 'Reapeat password'}))
 
     class Meta:
         model=User
@@ -22,10 +24,13 @@ class UserRegistrationForm(forms.ModelForm):
         return cd['password2']
 
 class OrderCreationForm(forms.ModelForm):
-
     deadline=forms.DateTimeField(label='Deadline',widget=forms.DateTimeInput,validators=(validate_deadline,),initial=timezone.now())
 
     class Meta:
         model=Order
         fields=('description',)
 
+
+class CustomAuthForm(AuthenticationForm):
+    username = forms.CharField(widget=forms.TextInput(attrs={'placeholder': 'Username'}))
+    password = forms.CharField(widget=forms.PasswordInput(attrs={'placeholder':'Password'}))

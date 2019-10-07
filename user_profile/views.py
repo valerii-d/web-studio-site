@@ -3,6 +3,9 @@ from django.contrib.auth.decorators import login_required
 from .forms import UserRegistrationForm, OrderCreationForm
 from .models import Order
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+from .forms import CustomAuthForm
+from django.contrib.auth.views import LoginView
+from django.contrib.auth import authenticate, login
 
 def register(request):
     if request.method=='POST':
@@ -11,7 +14,12 @@ def register(request):
             new_user=user_form.save(commit=False)
             new_user.set_password(user_form.cleaned_data['password'])
             new_user.save()
-            return render(request,'user_profile/orders.html',{'user':new_user})
+            if new_user is not None:
+                if new_user.is_active:
+                    login(request, new_user)
+                    return redirect('orders')
+                else:
+                    return redirect('register')
     else:
         user_form=UserRegistrationForm()
     return render(request,'registration/register.html',{'form':user_form})
@@ -22,7 +30,7 @@ def orders(request):
     if request.method=='POST':
         pass    
     else:
-        orders_list=Order.objects.all()
+        orders_list=Order.objects.filter(user_id=request.user.id)
         paginator=Paginator(orders_list,2)
         page=request.GET.get('page')
         try:
@@ -57,3 +65,6 @@ def revoke_order(request,id):
     else:
         return render(request,'user_profile/detail.html',{'order':order})
 
+class Login(LoginView):
+    authentication_form=CustomAuthForm
+    template_name='registration/login.html'

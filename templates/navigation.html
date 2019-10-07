@@ -1,42 +1,40 @@
 {% load static %}
-<nav class="navbar navbar-light nav-col navbar-shadow">
-    <a class="navbar-brand ml-4 navbar-a" href="/">
-        <img src="{% static 'images/home.svg' %}" alt="home" class="d-inline block align-top">
-     <h1 class="navbar-header">Web studio</h1>
-    </a>
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+<!-- ====== Navgition ======  -->
+<nav class="navbar navbar-default">
+    <div class="container">
+      <!-- Brand and toggle get grouped for better mobile display -->
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#nav-icon-collapse" aria-expanded="false">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
 
-                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                  Dropdown
-                </a>
-                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                  <a class="dropdown-item" href="#">Action</a>
-                  <a class="dropdown-item" href="#">Another action</a>
-                  <div class="dropdown-divider"></div>
-                  <a class="dropdown-item" href="#">Something else here</a>
-                </div>
+         <!-- logo -->
+        <a class="logo" href="#">Pied Piper</a>
 
-    </div>
-    <ul class="nav justify-content-end">
-        {% if user.is_authenticated %}
-        <li class="nav-item dropdown mr-4">
-            <a class="nav-link dropdown-toggle nav-link-header" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                Profile
-            </a>
-            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <a class="dropdown-item" href="{% url 'create_order' %}">Create order</a>
-            <a class="dropdown-item" href="{% url 'orders' %}">Show orders</a>
-            <div class="dropdown-divider"></div>
-            <a class="dropdown-item" href="{% url 'logout' %}">Logout</a>
-            </div>
-        </li>
-        {% else %}
-            <li class="nav-item mr-4">
-                <a href="{% url 'login' %}" class="btn btn-outline-success btn-lg">Login</a>
-            </li>
-            <li class="nav-item mr-4">
-                <a href="{% url 'register' %}" class="btn btn-outline-primary btn-lg">Sign up</a>
-            </li>
-        {% endif %}
-    </ul>
-</nav>
+      </div>
+
+      <!-- Collect the nav links, and other content for toggling -->
+      <div class="collapse navbar-collapse" id="nav-icon-collapse">
+
+        <!-- links -->
+        <ul class="nav navbar-nav navbar-right">
+          <li><a href="#" data-scroll-nav="0" class="active">Home</a></li>
+          <li><a href="#" data-scroll-nav="1">About</a></li>
+          <li><a href="#" data-scroll-nav="2">Services</a></li>
+          <li><a href="#" data-scroll-nav="3">Works</a></li>
+          <li><a href="#" data-scroll-nav="4">Clients</a></li>
+          {% if user.is_authenticated %}
+          <li><a href="{% url 'orders' %}">Profile</a></li>
+          <li><a href="{% url 'logout' %}">Log out</a></li>
+          {% else %}
+          <li><a href="{% url 'login' %}">Sign In</a></li>
+          <li><a href="{% url 'register' %}">Sign Up</a></li>
+          {% endif %}
+        </ul>
+      </div><!-- /.navbar-collapse -->
+    </div><!-- /.container -->
+  </nav>
+  <!-- ====== End Navgition ======  -->

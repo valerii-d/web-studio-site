@@ -14,7 +14,6 @@
       <form action="{% url 'register' %}" method="POST">
           {% csrf_token %}
           {% for field in form %}
-          {{ form.non_field_errors }}
           <div class="email_field">
               {{ field.errors }}
               {{field}}

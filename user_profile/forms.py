@@ -4,14 +4,15 @@ from .models import Order
 from django.utils import timezone
 from .validators import validate_deadline
 from django.contrib.auth.forms import AuthenticationForm
+from django.core.validators import ValidationError
 
 class UserRegistrationForm(forms.ModelForm):
-    username=forms.CharField(label='Username',required=True,widget=forms.TextInput(attrs={'placeholder': 'Username'})) 
-    first_name=forms.CharField(label='First name',required=True,widget=forms.TextInput(attrs={'placeholder': 'First name'}))
-    last_name=forms.CharField(label='Last name',required=True,widget=forms.TextInput(attrs={'placeholder': 'Last name'}))
-    email=forms.EmailField(label='Email',required=True,widget=forms.EmailInput(attrs={'placeholder': 'Email'}))
-    password=forms.CharField(label='Password',required=True,widget=forms.PasswordInput(attrs={'placeholder': 'Password'}))
-    password2=forms.CharField(label='Reapeat password',required=True,widget=forms.PasswordInput(attrs={'placeholder': 'Reapeat password'}))
+    username=forms.CharField(label='Username',widget=forms.TextInput(attrs={'placeholder': 'Username'})) 
+    first_name=forms.CharField(label='First name',widget=forms.TextInput(attrs={'placeholder': 'First name'}))
+    last_name=forms.CharField(label='Last name',widget=forms.TextInput(attrs={'placeholder': 'Last name'}))
+    email=forms.EmailField(label='Email',widget=forms.EmailInput(attrs={'placeholder': 'Email'}))
+    password=forms.CharField(label='Password',widget=forms.PasswordInput(attrs={'placeholder': 'Password'}))
+    password2=forms.CharField(label='Reapeat password',widget=forms.PasswordInput(attrs={'placeholder': 'Reapeat password'}))
 
     class Meta:
         model=User
@@ -26,6 +27,9 @@ class UserRegistrationForm(forms.ModelForm):
 class OrderCreationForm(forms.ModelForm):
     deadline=forms.DateTimeField(label='Deadline',widget=forms.DateTimeInput,validators=(validate_deadline,),initial=timezone.now())
 
+    def validate_deadline(value):
+        if value!=timezone.now():
+            return ValidationError("The date cannot be in the past!")
     class Meta:
         model=Order
         fields=('description',)

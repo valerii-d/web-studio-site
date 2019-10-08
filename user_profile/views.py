@@ -6,6 +6,7 @@ from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from .forms import CustomAuthForm
 from django.contrib.auth.views import LoginView
 from django.contrib.auth import authenticate, login
+from django.contrib.auth import logout
 
 def register(request):
     if request.method=='POST':
@@ -24,6 +25,10 @@ def register(request):
         user_form=UserRegistrationForm()
     return render(request,'registration/register.html',{'form':user_form})
 
+@login_required
+def logout_view(request):
+    logout(request)
+    return redirect('/')
 
 @login_required
 def orders(request):

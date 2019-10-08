@@ -23,11 +23,6 @@ class Order(models.Model):
     created=models.DateTimeField(auto_now_add=True)
     updated=models.DateTimeField(auto_now=True)
 
-    def save(self,*args,**kwargs):
-        if self.deadline<=timezone.now():
-            raise ValidationError("The date cannot be in the past!")
-        super(Order,self).save(*args, **kwargs)
-
     def __str__(self):
         return  self.created.strftime('%H:%M:%S %d.%m.%Y ')+self.user.email
     class Meta:

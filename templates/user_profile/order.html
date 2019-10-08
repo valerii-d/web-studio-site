@@ -1,18 +1,33 @@
-{% extends "form.html" %}
+{% extends "index.html" %}
 
-{% load crispy_forms_tags %}
+{% load static %}
 
 {% block title %}Order{% endblock %}
 
 {% block header %}Create order{% endblock %}
 
-{% block form %}
-<form action="{% url 'create_order' %}" method="POST" >
-    {% csrf_token %}
-    {{form|crispy}}
-    <div class="row justify-content-center">
-        <a class="btn btn-danger btn-lg mr-4 mb-2" href="{% url 'orders' %}">Cancel</a>
-        <input type="submit" class="btn btn-success btn-lg mb-2" value="Submit">
-    <div>
-</form>
+{% block content %}
+<link rel="stylesheet" href="{% static 'css/create_order.css' %}">
+<div class="sign_in_wrapper">
+    <div class="sign_in_form">
+        <h2>Create Order</h2>
+        <form  action="{% url 'create_order' %}" method="POST">
+                {{ form.non_field_errors }}
+            {% csrf_token %}
+            <div class="description_field">
+                <label> Description </label> <br>
+                {{form.description}}
+                {{ form.description.errors }}
+            </div>
+            <div class="dead_line">
+                <label> Deadline </label> <br>
+                {{form.deadline}}
+                {{ form.deadline.errors }}
+            </div>
+            <div >
+                <input type="submit" value="Submit" class="buton buton-bg">
+            </div>
+        </form>
+    </div>
+</div>
 {% endblock %}

@@ -1,6 +1,7 @@
 from django.contrib import admin
 from .models import Order
 from django.contrib.admin.models import LogEntry
+from .models import Manager
 
 LogEntry.object_repr
 class OrderAdmin(admin.ModelAdmin):
@@ -10,7 +11,7 @@ class OrderAdmin(admin.ModelAdmin):
         (
             None,
             {
-                'fields':(('status','paid'),'price',)
+                'fields':(('status','paid'),'price','file',)
             }
         ), 
     )
@@ -24,4 +25,4 @@ class OrderAdmin(admin.ModelAdmin):
         return False
 
 admin.site.register(Order,OrderAdmin)
-admin.site.site_header="My administration"
+admin.site.site_header="Administration"

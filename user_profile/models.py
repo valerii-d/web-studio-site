@@ -5,6 +5,7 @@ from django.utils import timezone
 from datetime import timedelta
 from django.urls import reverse
 from django.core.validators import ValidationError
+from manager.models import Manager
 
 class Order(models.Model):
     STATUS_CHOICES=(
@@ -14,7 +15,7 @@ class Order(models.Model):
         ('done','Done')
     )
     id_order=models.AutoField(primary_key=True)
-    user=models.ForeignKey(User,related_name='orders',on_delete=models.CASCADE)
+    user=models.ForeignKey(User,related_name='orders',on_delete=models.PROTECT)
     status=models.CharField(max_length=11, choices=STATUS_CHOICES,default='processing')
     description=models.TextField()
     deadline=models.DateTimeField()
@@ -22,6 +23,8 @@ class Order(models.Model):
     paid=models.BooleanField(default=False)
     created=models.DateTimeField(auto_now_add=True)
     updated=models.DateTimeField(auto_now=True)
+    manager=models.ForeignKey(Manager,related_name='manager_orders',on_delete=models.PROTECT,null=True)
+    file=models.FileField(null=True)
 
     def __str__(self):
         return  self.created.strftime('%H:%M:%S %d.%m.%Y ')+self.user.email
@@ -35,3 +38,4 @@ class Order(models.Model):
         return reverse('order',args=[
             self.pk,
         ])
+

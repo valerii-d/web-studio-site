@@ -16,7 +16,7 @@ class UserRegistrationForm(forms.ModelForm):
 
     class Meta:
         model=User
-        fields=('username',)
+        fields=('username','email','first_name','last_name',)
 
     def clean_password2(self):
         cd=self.cleaned_data
@@ -25,7 +25,10 @@ class UserRegistrationForm(forms.ModelForm):
         return cd['password2']
 
 class OrderCreationForm(forms.ModelForm):
-    deadline=forms.DateTimeField(label='Deadline',widget=forms.DateTimeInput,validators=(validate_deadline,),initial=timezone.now())
+    deadline=forms.DateTimeField(
+    label='Deadline',
+    widget=forms.DateTimeInput(),
+    validators=(validate_deadline,),initial=timezone.now())
 
     def validate_deadline(value):
         if value!=timezone.now():

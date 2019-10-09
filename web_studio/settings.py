@@ -38,7 +38,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'user_profile',
-    'crispy_forms',
+    'homepage',
+    'manager',
 ]
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
@@ -131,3 +132,5 @@ LOGIN_REDIRECT_URL=reverse_lazy('orders')
 LOGIN_URL=reverse_lazy('login')
 LOGOUT_URL=reverse_lazy('logout')
 
+MEDIA_ROOT=os.path.join(BASE_DIR,'media')
+MEDIA_URL='/media/'

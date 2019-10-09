@@ -46,6 +46,12 @@
                 {% endif %}
             </td>
             <td>
+                {% if order.file %}
+                <form enctype="multipart/form-data" action="{% url 'download' path=order.file %}" method="POST">
+                    {% csrf_token %}
+                    <input type="submit" value="Download" class="btn btn-link btn-revoke submit-color">
+                </form>
+                {% endif %}
                 <a href="{{order.get_absolute_url}}" class="btn btn-link btn-detail submit-color">Detail</a>
                 {% if order.status == 'processing' %}
                     <form action="{{order.get_absolute_url}}" method="POST">

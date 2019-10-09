@@ -40,6 +40,8 @@ INSTALLED_APPS = [
     'user_profile',
     'homepage',
     'manager',
+    'channels',
+    'chat',
 ]
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 

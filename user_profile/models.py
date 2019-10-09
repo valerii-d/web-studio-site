@@ -38,4 +38,3 @@ class Order(models.Model):
         return reverse('order',args=[
             self.pk,
         ])
-

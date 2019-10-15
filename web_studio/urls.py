@@ -21,8 +21,9 @@ from django.conf.urls.static import static
 urlpatterns = [
     path('',include('homepage.urls')),
     path('',include('user_profile.urls')),
+    path('jet/dashboard/', include('jet.dashboard.urls', 'jet-dashboard')),
+    path('jet/',include('jet.urls','jet')),
     path('admin/', admin.site.urls),
-    path('chat/',include('chat.urls')),
 ]
 
 if settings.DEBUG:

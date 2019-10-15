@@ -5,11 +5,9 @@ from user_profile.models import Order
 
 
 class ManagerAdmin(admin.ModelAdmin):
+    list_display=('date_joined','first_name','last_name','email',)
     exclude=('is_staff','user_permissions','is_superuser','last_login','is_active','date_joined')
-
-    def get_queryset(self, request):
-        queryset=super().get_queryset(request)
-        return queryset.filter(manager=request.user)
+    list_per_page=10
 
 class UserAdmin(admin.ModelAdmin):
     list_display=('username','first_name','last_name','email',)
@@ -21,7 +19,6 @@ class UserAdmin(admin.ModelAdmin):
     
     def has_change_permission(self,request,obj=None):
         return False
-
 
 admin.site.unregister(User)
 admin.site.register(User,UserAdmin)

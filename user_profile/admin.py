@@ -5,24 +5,34 @@ from .models import Manager
 
 LogEntry.object_repr
 class OrderAdmin(admin.ModelAdmin):
-    list_display=('created','status','deadline','price','paid',)
-    list_filter=('created','status','deadline','paid',)
+    list_display=('created','description','status','deadline','price','paid','manager',)
+    list_filter=('created','status','deadline','paid','manager',)
     fieldsets=(
         (
             None,
             {
-                'fields':(('status','paid'),'price','file',)
+                'fields':('status',('price','paid'),'file',)
             }
         ), 
     )
     
-    search_fields=['user.first name',]
+    search_fields=['user__email',]
 
     def has_delete_permission(self,request,obj=None):
         return False
 
     def has_add_permission(self,request):
         return False
+
+    def has_change_permission(self,request,obj=None):
+        if obj!=None and ( obj.manager==None or  obj.manager_id == request.user.id ):                
+            return True
+        return False
+
+    def save_model(self,request, obj, form, change):
+        obj.manager=request.user.manager
+        super(OrderAdmin,self).save_model(request,obj,form,change)
+    
 
 admin.site.register(Order,OrderAdmin)
 admin.site.site_header="Administration"

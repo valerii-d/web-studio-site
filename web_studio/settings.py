@@ -136,3 +136,11 @@ LOGOUT_URL=reverse_lazy('logout')
 
 MEDIA_ROOT=os.path.join(BASE_DIR,'media')
 MEDIA_URL='/media/'
+
+JET_SIDE_MENU_ITEMS=[
+    {
+        'label': ('Chat'),'items':[
+            {'label': ('Chat'), 'url': '/chat', 'url_blank': True},
+        ]
+    },
+]

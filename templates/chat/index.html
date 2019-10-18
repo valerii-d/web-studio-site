@@ -24,19 +24,20 @@
 							<ul class="nav discussions" role="tablist">
 								{% for u in users %}
 								<li>
-									<a id="contact" href="{% url 'chat:messages' user.id %}" class="filter direct active" data-chat="open" data-toggle="tab"
-										role="tab" aria-controls="chat1" aria-selected="true">
+									<a href="{% url 'chat:messages' u.id %}" class="contact filter direct active"
+										data-chat="open" data-toggle="tab" role="tab" aria-controls="chat1"
+										aria-selected="true">
 										<div class="status online"><img src="{% static 'img/avatars/user.svg' %}"
 												alt="avatar"></div>
 										<div class="content">
-												<div class="headline">
-													<h5>{{u.first_name}} {{u.last_name}}</h5>
-													{% if u.is_superuser %}
-														<span>Admin</span>
-													{% else %}
-														<span>Manager</span>
-													{% endif %}
-												</div>
+											<div class="headline">
+												<h5>{{u.first_name}} {{u.last_name}}</h5>
+												{% if u.is_superuser %}
+												<span>Admin</span>
+												{% else %}
+												<span>Manager</span>
+												{% endif %}
+											</div>
 										</div>
 									</a>
 								</li>
@@ -57,38 +58,16 @@
 								<div class="top">
 									<div class="headline">
 										<img src="{% static 'img/avatars/user.svg' %}" alt="avatar">
-										<div class="content">
-											<h5>{{users.0.first_name}} {{users.0.last_name}}</h5>
-											<span>{{users.0.email}}</span>
+										<div id="info-user" class="content">
+											<!--Info-->
 										</div>
 									</div>
 								</div>
 							</div>
 							<div class="middle" id="scroll">
 								<div class="container">
-									<ul>
-										<li>
-											<img src="{% static 'img/avatars/user.svg' %}" alt="avatar">
-											<div class="content">
-												<div class="message">
-													<div class="bubble">
-														<p>Lorem Ipsum is simply dummy text of the printing and
-															typesetting industry.</p>
-													</div>
-												</div>
-												<span>07:30am</span>
-											</div>
-										</li>
-										<li>
-											<div class="content">
-												<div class="message">
-													<div class="bubble">
-														<p>Many desktop publishing packages.</p>
-													</div>
-												</div>
-												<span>11:56am</span>
-											</div>
-										</li>
+									<ul id="chat">
+										<!--chat-->
 									</ul>
 								</div>
 							</div>
@@ -108,27 +87,60 @@
 			</div>
 		</div>
 	</div>
-	<script
-	src="https://code.jquery.com/jquery-3.4.1.min.js"
-	integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
-	crossorigin="anonymous"></script>	
+	<script src="https://code.jquery.com/jquery-3.4.1.min.js"
+		integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
 	<script src="{% static 'js/vendor/popper.min.js' %}"></script>
 	<script src="{% static 'js/vendor/feather.min.js' %}"></script>
 	<script src="{% static 'js/vendor/eva.min.js' %}"></script>
 	<script src="{% static 'js/vendor/bootstrap.min.js' %}"></script>
 	<script src="{% static 'js/swipe.min.js' %}"></script>
 	<script>
-		$(document).ready(function(){
-			$('#contact').click(function(e){
+		$(document).ready(function () {
+			$('.contact').click(function (e) {
 				e.preventDefault();
 				$.ajax({
 					data: 'GET',
 					async: true,
 					url: this.href,
-					success: function(data){
-						alert('ok');
+					success: function (data) {
+						$('#chat li').remove();
+						$('#info-user h5').remove();
+						$('#info-user span').remove();
+						id = data['sender_id'];
+						$('#info-user').append(
+							`<h5>${data['receiver_f']}  ${data['receiver_l']} </h5>
+							<span>${data['receiver_email']} </span>`
+						)
+						data['results'].forEach(function (message) {
+							if (id !== message['user_id']) {
+								$('#chat').append(
+									`<li>
+									<img src="../../static/img/avatars/user.svg" alt="avatar">
+										<div class="content">
+											<div class="message">
+												<div class="bubble">
+													<p>${message['message']}</p>
+												</div>
+											</div>
+											<span>${message['created']}</span>
+										</div>
+									</li>`);
+							} else {
+								$('#chat').append(
+									`<li>
+										<div class="content">
+											<div class="message">
+												<div class="bubble">
+													<p>${message['message']}</p>
+												</div>
+											</div>
+											<span>${message['created']}</span>
+										</div>
+										</li>`);
+							}
+						});
 					},
-					dataType:'json',
+					dataType: 'json',
 				});
 			});
 		});

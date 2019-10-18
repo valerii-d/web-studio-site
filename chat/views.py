@@ -5,6 +5,9 @@ from manager.models import Manager
 from itertools import chain
 from user_profile.models import Order
 from django.http import JsonResponse
+from .models import Message, Chat
+from django.db.models import Q
+from django.shortcuts import get_object_or_404
 
 @login_required
 def index(request):
@@ -23,4 +26,12 @@ def index(request):
 @login_required
 def get_messages(request,id):
     if request.is_ajax():
-        return JsonResponse({'ok':'ok'})
+        receiver=get_object_or_404(User,pk=id)
+        sender = request.user
+        messages=Message.objects.filter(Q(user=sender) | Q(user=receiver)).order_by('created').values()
+        return JsonResponse({
+        'sender_id': sender.id,
+        'receiver_f': receiver.first_name,
+        'receiver_l': receiver.last_name,
+        'receiver_email':receiver.email,
+        'results': list(messages)})

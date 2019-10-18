@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'user_profile',
     'homepage',
     'manager',
+    'chat',
 ]
 
 MIDDLEWARE = [

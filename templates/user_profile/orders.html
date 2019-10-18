@@ -75,16 +75,15 @@
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-auto">
-            <p>No orders.But you can easily change it 😉</p>
+            <a href="{% url 'chat:index' %}" class="btn  btn-primary mb-4" target="_blank">Chat</a>
         </div>
-    <div>
-</div>
-<div class="container">
-    <div class="row justify-content-center">
         <div class="col-md-auto">
-            <a href="{% url 'create_order' %}" class="btn  btn-primary mb-4">Add order</a>
+            <p>No orders.But you can easily change it 😉</p>
+            </div>
+        <div class="col-md-auto">
+                <a href="{% url 'create_order' %}" class="btn  btn-primary mb-4">Add order</a>
         </div>
-    <div>
+    <div>    
 </div>
 {% endif %}
 {% endblock %}

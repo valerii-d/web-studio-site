@@ -19,12 +19,14 @@
 				<div class="tab-content">
 					<div class="tab-pane fade show active" id="conversations" role="tabpanel">
 						<div class="middle">
-							<h4>Users</h4>
+							<h4>Chats</h4>
 							<hr>
 							<ul class="nav discussions" role="tablist">
-								{% for u in users %}
+								{% for chat in chats %}
+								{% for u in chat.users.all %}
+								{% if u.id != user.id %}
 								<li>
-									<a href="{% url 'chat:messages' u.id %}" class="contact filter direct active"
+									<a href="{% url 'chat:messages' chat.id %}" class="contact filter direct active"
 										data-chat="open" data-toggle="tab" role="tab" aria-controls="chat1"
 										aria-selected="true">
 										<div class="status online"><img src="{% static 'img/avatars/user.svg' %}"
@@ -41,6 +43,8 @@
 										</div>
 									</a>
 								</li>
+								{% endif %}
+								{% endfor %}
 								{% endfor %}
 							</ul>
 						</div>
@@ -59,7 +63,8 @@
 									<div class="headline">
 										<img src="{% static 'img/avatars/user.svg' %}" alt="avatar">
 										<div id="info-user" class="content">
-											<!--Info-->
+											<h5>{{admin.first_name}}</h5>
+											<span>{{admin.last_name}}</span>`
 										</div>
 									</div>
 								</div>
@@ -67,14 +72,40 @@
 							<div class="middle" id="scroll">
 								<div class="container">
 									<ul id="chat">
-										<!--chat-->
+										{% for message in messages %}
+										{% if message.user.id == user.id %}
+										<li>
+											<div class="content">
+												<div class="message">
+													<div class="bubble">
+														<p>{{message.message}}</p>
+													</div>
+												</div>
+												<span>{{ message.created|date:"D d M Y H:i" }}</span>
+											</div>
+										</li>
+										{% else %}
+										<li>
+											<img src="../../static/img/avatars/user.svg" alt="avatar">
+											<div class="content">
+												<div class="message">
+													<div class="bubble">
+														<p>{{message.message}}</p>
+													</div>
+												</div>
+												<span>{{ message.created|date:"D d M Y H:i" }}</span>
+											</div>
+										</li>
+										{% endif %}
+										{% endfor %}
 									</ul>
 								</div>
 							</div>
 							<div class="container">
 								<div class="bottom">
-									<form>
-										<textarea class="form-control" placeholder="Type message..."
+									<form id="sender-form" action="#" method="POST">
+										{% csrf_token %}
+										<input id="message" class="form-control" placeholder="Type message..."
 											rows="1"></textarea>
 										<button type="submit" class="btn prepend"><i
 												data-eva="paper-plane"></i></button>
@@ -96,10 +127,11 @@
 	<script src="{% static 'js/swipe.min.js' %}"></script>
 	<script>
 		$(document).ready(function () {
+			chatId=null
 			$('.contact').click(function (e) {
 				e.preventDefault();
 				$.ajax({
-					data: 'GET',
+					type: 'GET',
 					async: true,
 					url: this.href,
 					success: function (data) {
@@ -107,6 +139,7 @@
 						$('#info-user h5').remove();
 						$('#info-user span').remove();
 						id = data['sender_id'];
+						chatId=data['chat_id'];
 						$('#info-user').append(
 							`<h5>${data['receiver_f']}  ${data['receiver_l']} </h5>
 							<span>${data['receiver_email']} </span>`
@@ -139,6 +172,32 @@
 										</li>`);
 							}
 						});
+					},
+					dataType: 'json',
+				});
+			});
+			$('#sender-form').submit(function(e){
+				e.preventDefault();
+				var csrftoken = jQuery("[name=csrfmiddlewaretoken]").val();
+				var message=$('#message').val();
+				$.ajax({
+					type: 'POST',
+					async: true,
+					url: `/chat/${chatId}/`,
+					data: { csrfmiddlewaretoken:'{{csrf_token}}',message:message},
+					success: function(data){
+						$('#chat').append(
+							`<li>
+							<img src="../../static/img/avatars/user.svg" alt="avatar">
+								<div class="content">
+									<div class="message">
+										<div class="bubble">
+											<p>${data['message']}</p>
+										</div>
+									</div>
+									<span>${data['created']}</span>
+								</div>
+							</li>`);
 					},
 					dataType: 'json',
 				});

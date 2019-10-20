@@ -2,7 +2,7 @@ from django.contrib import admin
 from django.contrib.auth.models import User
 from .models import Manager
 from user_profile.models import Order
-
+from chat.models import Chat
 
 class ManagerAdmin(admin.ModelAdmin):
     list_display=('date_joined','first_name','last_name','email',)
@@ -19,6 +19,15 @@ class UserAdmin(admin.ModelAdmin):
     
     def has_change_permission(self,request,obj=None):
         return False
+
+    def save_model(self, request, obj, form, change):
+        if obj.is_superuser == True:
+            users = User.objects.exclude(id=obj.id)
+            for user in users:
+                chat = Chat()
+                chat.save()
+                chat.users.add(request.user,user)
+        super(UserAdmin,self).save_model(request,obj,form,change)
 
 admin.site.unregister(User)
 admin.site.register(User,UserAdmin)

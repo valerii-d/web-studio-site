@@ -7,7 +7,7 @@ class Message(models.Model):
     created=models.DateTimeField(auto_now_add=True)
 
     class Meta:
-        db_table="messages"
+        db_table='messages'
 
     def __str__(self):
         return self.message
@@ -17,7 +17,7 @@ class Chat(models.Model):
     messages=models.ManyToManyField(Message,blank=True)
 
     class Meta:
-        db_table="chats"
+        db_table='chats'
 
     def __str__(self):
-        return "{}".format(self.pk) 
+        return "{}".format(self.pk)

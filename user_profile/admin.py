@@ -2,6 +2,7 @@ from django.contrib import admin
 from .models import Order
 from django.contrib.admin.models import LogEntry
 from .models import Manager
+from chat.models import Chat
 
 LogEntry.object_repr
 class OrderAdmin(admin.ModelAdmin):
@@ -30,7 +31,10 @@ class OrderAdmin(admin.ModelAdmin):
         return True
 
     def save_model(self,request, obj, form, change):
-        obj.manager=request.user.manager
+        obj.manager = request.user.manager
+        chat = Chat() #create chat with user and manager
+        chat.save()
+        chat.users.add(obj.user, obj.manager)
         super(OrderAdmin,self).save_model(request,obj,form,change)
     
 

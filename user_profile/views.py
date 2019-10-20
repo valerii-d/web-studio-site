@@ -10,6 +10,8 @@ from django.contrib.auth import logout
 from django.http import HttpResponse, Http404
 import os
 from django.conf import settings
+from chat.models import Chat
+from django.contrib.auth.models import User
 
 user_login_required=user_passes_test(lambda user: user.is_staff==False and user.is_superuser==False, login_url='/login')
 
@@ -25,6 +27,11 @@ def register(request):
             new_user=user_form.save(commit=False)
             new_user.set_password(user_form.cleaned_data['password'])
             new_user.save()
+            admins = User.objects.filter(is_superuser=True) # select all admins
+            for admin in admins:
+                chat = Chat()  #create chat
+                chat.save()
+                chat.users.add(new_user,admin)  #add user and admin
             if new_user is not None:
                 if new_user.is_active:
                     login(request, new_user)

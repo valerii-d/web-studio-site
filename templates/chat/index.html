@@ -27,7 +27,7 @@
 								{% if u.id != user.id %}
 								<li>
 									<a href="{% url 'chat:messages' chat.id %}" class="contact filter direct active"
-										data-chat="open" data-toggle="tab" role="tab" aria-controls="chat1"
+										data-chat="open" data-toggle="tab" role="tab" aria-controls="chat1" chat-id={{chat.id}}
 										aria-selected="true">
 										<div class="status online"><img src="{% static 'img/avatars/user.svg' %}"
 												alt="avatar"></div>
@@ -36,7 +36,7 @@
 												<h5>{{u.first_name}} {{u.last_name}}</h5>
 												{% if u.is_superuser %}
 												<span>Admin</span>
-												{% else %}
+												{% elif u.is_staff %}
 												<span>Manager</span>
 												{% endif %}
 											</div>
@@ -125,85 +125,7 @@
 	<script src="{% static 'js/vendor/eva.min.js' %}"></script>
 	<script src="{% static 'js/vendor/bootstrap.min.js' %}"></script>
 	<script src="{% static 'js/swipe.min.js' %}"></script>
-	<script>
-		$(document).ready(function () {
-			chatId=null
-			$('.contact').click(function (e) {
-				e.preventDefault();
-				$.ajax({
-					type: 'GET',
-					async: true,
-					url: this.href,
-					success: function (data) {
-						$('#chat li').remove();
-						$('#info-user h5').remove();
-						$('#info-user span').remove();
-						id = data['sender_id'];
-						chatId=data['chat_id'];
-						$('#info-user').append(
-							`<h5>${data['receiver_f']}  ${data['receiver_l']} </h5>
-							<span>${data['receiver_email']} </span>`
-						)
-						data['results'].forEach(function (message) {
-							if (id !== message['user_id']) {
-								$('#chat').append(
-									`<li>
-									<img src="../../static/img/avatars/user.svg" alt="avatar">
-										<div class="content">
-											<div class="message">
-												<div class="bubble">
-													<p>${message['message']}</p>
-												</div>
-											</div>
-											<span>${message['created']}</span>
-										</div>
-									</li>`);
-							} else {
-								$('#chat').append(
-									`<li>
-										<div class="content">
-											<div class="message">
-												<div class="bubble">
-													<p>${message['message']}</p>
-												</div>
-											</div>
-											<span>${message['created']}</span>
-										</div>
-										</li>`);
-							}
-						});
-					},
-					dataType: 'json',
-				});
-			});
-			$('#sender-form').submit(function(e){
-				e.preventDefault();
-				var csrftoken = jQuery("[name=csrfmiddlewaretoken]").val();
-				var message=$('#message').val();
-				$.ajax({
-					type: 'POST',
-					async: true,
-					url: `/chat/${chatId}/`,
-					data: { csrfmiddlewaretoken:'{{csrf_token}}',message:message},
-					success: function(data){
-						$('#chat').append(
-							`<li>
-							<img src="../../static/img/avatars/user.svg" alt="avatar">
-								<div class="content">
-									<div class="message">
-										<div class="bubble">
-											<p>${data['message']}</p>
-										</div>
-									</div>
-									<span>${data['created']}</span>
-								</div>
-							</li>`);
-					},
-					dataType: 'json',
-				});
-			});
-		});
-	</script>
+	<script src="{% static 'js/chat.js' %}"></script>
 </body>
 
 </html>

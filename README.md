@@ -6,6 +6,7 @@ Web studio site
 ## Dependencies ✔️
 - python>3.0
 - virtualenv
+- redis
 ## Installation for Windows
 1. git clone https://github.com/PavelAndreyev1337/web-studio-site.git
 1. cd web-studio-site

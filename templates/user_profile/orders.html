@@ -12,16 +12,14 @@
     <div class="sign_in_form">
         <h2>Orders</h2>
         <hr>
-        <form method="GET" action="{% url 'create_order' %}">
-        <div class="submit_button">
-            <input type="submit" value="Add Order" class="buton buton-bg">
-        </div>
-        </form>
-        <form method="GET" action="{% url 'chat:index' %}" target="_blank">
-            <div class="submit_button">
-                <input type="submit" value="Chat" class="buton buton-bg">
+        <div class="buttons">
+            <div>
+                <a href="{% url 'create_order' %}" class="btn ">Add order</a>
             </div>
-        </form>
+            <div>
+                <a href="{% url 'chat:index' %}" class="btn" target="_blank">Chat</a>
+            </div>
+        </div>
         <table>
         <tr>
             <th>Date</th>
@@ -47,7 +45,7 @@
                 {% if order.paid %}
                     <i class="fas fa-times-circle"></i>
                 {% else %}
-                    <i class="fas fa-times-circle">
+                    <i class="fas fa-times-circle"></i>
                 {% endif %}
             </td>
             <td>
@@ -72,18 +70,21 @@
     </div>
 </div>
 {% else %}
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-auto">
-            <a href="{% url 'chat:index' %}" class="btn  btn-primary mb-4" target="_blank">Chat</a>
+<div class="sign_in_wrapper">
+    <div class="sign_in_form">
+        <div class="no_order_message">
+            <p>It seems like you didn't invested some money to us :( Maybe it's time to start? 😉</p>
         </div>
-        <div class="col-md-auto">
-            <p>No orders.But you can easily change it 😉</p>
+        <div class="buttons">
+            <div>
+                <a href="{% url 'create_order' %}" class="btn ">Add order</a>
             </div>
-        <div class="col-md-auto">
-                <a href="{% url 'create_order' %}" class="btn  btn-primary mb-4">Add order</a>
+            <div>
+                <a href="{% url 'chat:index' %}" class="btn" target="_blank">Chat</a>
+            </div>
         </div>
-    <div>    
+    </div>
 </div>
+
 {% endif %}
 {% endblock %}

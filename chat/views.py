@@ -13,10 +13,11 @@ app_name = 'chat'
 @login_required
 def index(request):
     user = request.user
-    chats = Chat.objects.filter(users__id=user.id)
-    admin=User.objects.filter(is_superuser=True)[0]
-    messages=Chat.objects.filter(users=admin)[0].messages.all()
-    return render(request,'chat/index.html',{'chats':chats,'admin':admin,'messages':messages})
+    chats = Chat.objects.filter(users=user)
+    f_user=chats[0].users.exclude(id=user.id)[0]
+    # f_user=User.objects.exclude(id=user.id)[0]
+    messages=chats[0].messages.all()
+    return render(request,'chat/index.html',{'chats':chats,'f_user':f_user,'messages':messages})
 
 @login_required
 def get_messages(request, id):

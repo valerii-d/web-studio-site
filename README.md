@@ -11,10 +11,10 @@ Web studio site
 1. ```git clone https://github.com/PavelAndreyev1337/web-studio-site.git```
 1. ```cd web-studio-site```
 1. ```virtualenv venv```
-1. ```venv/Scripts/activate.bat```
+1. ```venv\Scripts\activate.bat```
 1. ```pip install -r requirements.txt```
 1. ```python manage.py migrate```
-1. ```python manage.py shell<./seeds.py```
+1. ```python manage.py shell<.\seeds.py```
 1. [start the Redis](https://www.techomoro.com/how-to-run-redis-on-windows-10/)
 1. ```python manage.py runserver```
 ## About site 🤔

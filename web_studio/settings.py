@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'manager',
     'chat',
     'channels',
+    'django_seed',
 ]
 
 MIDDLEWARE = [

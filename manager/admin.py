@@ -1,5 +1,5 @@
 from django.contrib import admin
-from django.contrib.auth.models import User,Group
+from django.contrib.auth.models import User, Group
 from .models import Manager
 from user_profile.models import Order
 from chat.models import Chat
@@ -12,6 +12,9 @@ class ManagerAdmin(admin.ModelAdmin):
     def save_model(self,request,obj,form,change):
         group=Group.objects.filter(name='Managers')[0]
         super(ManagerAdmin,self).save_model(request,obj,form,change)
+        chat = Chat()
+        chat.save()
+        chat.users.add(request.user,obj)
         obj.groups.add(group)    
 
 admin.site.unregister(User)

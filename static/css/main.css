@@ -22,6 +22,11 @@ img{
 	height: auto;
 }
 
+.item-img img {
+  width: 100%;
+  height: 300px;
+}
+
 span{
   display: inline-block;
 }

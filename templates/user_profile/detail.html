@@ -1,13 +1,28 @@
 {% extends 'index.html' %}
 
+{% load static %}
+
 {% block title %}Order{% endblock %}
 
 {% block content %}
-    Description:
-    <div>
-        {{ order.description|linebreaks }}
-        {{ order.deadline|linebreaks }}
+<link rel="stylesheet" href="{% static 'css/order_status.css' %}">
+
+<div class="sign_in_wrapper">
+    <div class="sign_in_form">
+        <h2>Description</h2>
+        <hr>
+        <div>
+            <h3 style="margin-bottom: 2%;">Order description</h3>
+            {{ order.description|linebreaks }}
+            <h3 style="margin-bottom: 2%;">Dead line</h3>
+            {{ order.deadline|linebreaks }}
+        </div>
+        <div class="buttons" style="margin: 2% 0 0 0 !important; display: block !important;">
+            <div style="float: left !important;">
+                <a href="{% url 'orders' %}" class="btn" target="_blank" >Back</a>
+            </div>
+        </div>
     </div>
-<a href="{% url 'orders' %}">Back</a>
+</div>
 
 {% endblock %}

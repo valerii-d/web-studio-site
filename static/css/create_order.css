@@ -52,3 +52,55 @@ body {
 .errorlist{
   color:red;
 }
+
+@media screen and (max-width: 1200px) {
+  body {
+    background-size: auto;
+  }
+  .sign_in_wrapper {
+    margin: 15% auto;
+    width: 45%;
+  }
+}
+
+@media screen and (max-width: 1024px) {
+  .sign_in_wrapper {
+    margin: 18% auto;
+    width: 50%;
+  }
+}
+
+@media screen and (max-width: 900px) {
+  .sign_in_wrapper {
+    margin: 20% auto;
+    width: 70%;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .sign_in_wrapper {
+    margin: 25% auto;
+    width: 80%;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .sign_in_wrapper {
+    margin: 32% auto;
+    width: 90%;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .sign_in_wrapper {
+    margin: 45% auto;
+    width: 95%;
+  }
+}
+
+@media screen and (max-width: 320px) {
+  .sign_in_wrapper {
+    margin: 60% auto;
+    width: 100%;
+  }
+}

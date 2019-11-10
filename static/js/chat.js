@@ -85,7 +85,7 @@ $(document).ready(function () {
             success: function(data){
                      chatSocket.send(JSON.stringify({
                     'message':data['message'],
-                    'created':data['created'],
+                    'created':data['created'].substring(0, 10),
                 }));
                 $('#message').val('');
             },

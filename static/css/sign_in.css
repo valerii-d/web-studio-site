@@ -49,6 +49,65 @@ body {
   padding: 2% 0;
   font-size: 15px !important;
 }
+
+p {
+  margin-top: 10px;
+  width: 100%;
+}
+
+p a {
+  text-decoration: underline !important;
+  cursor: pointer;
+}
+
 .errorlist{
   color: red;
+}
+
+@media screen and (max-width: 1200px) {
+  .sign_in_wrapper {
+    width: 40%;
+  }
+}
+
+@media screen and (max-width: 1024px) {
+  .sign_in_wrapper {
+    margin: 20% auto;
+    width: 50%;
+  }
+}
+
+@media screen and (max-width: 900px) {
+  .sign_in_wrapper {
+    margin: 25% auto;
+    width: 60%;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .sign_in_wrapper {
+    margin: 30% auto;
+    width: 50%;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .sign_in_wrapper {
+    margin: 38% auto;
+    width: 70%;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .sign_in_wrapper {
+    margin: 45% auto;
+    width: 80%;
+  }
+}
+
+@media screen and (max-width: 320px) {
+  .sign_in_wrapper {
+    margin: 70% auto;
+    width: 95%;
+  }
 }

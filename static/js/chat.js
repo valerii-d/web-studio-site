@@ -13,7 +13,7 @@ $(document).ready(function () {
                             <p>${data['message']}</p>
                         </div>
                     </div>
-                    <span>${data['created']}</span>
+                    <span>${data['created'].substring(0, 10)}</span>
                 </div>
         </li>`);
     }
@@ -47,7 +47,7 @@ $(document).ready(function () {
                                             <p>${message['message']}</p>
                                         </div>
                                     </div>
-                                    <span>${message['created']}</span>
+                                    <span>${message['created'].substring(0, 10)}</span>
                                 </div>
                             </li>`);
                     } else {
@@ -59,7 +59,7 @@ $(document).ready(function () {
                                             <p>${message['message']}</p>
                                         </div>
                                     </div>
-                                    <span>${message['created']}</span>
+                                    <span>${message['created'].substring(0, 10)}</span>
                                 </div>
                             </li>`);
                     }

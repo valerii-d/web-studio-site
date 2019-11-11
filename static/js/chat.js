@@ -86,6 +86,7 @@ $(document).ready(function () {
                      chatSocket.send(JSON.stringify({
                     'message':data['message'],
                     'created':data['created'].substring(0, 10),
+                    'class': 'asd'
                 }));
                 $('#message').val('');
             },

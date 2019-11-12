@@ -39,9 +39,9 @@ $(document).ready(function () {
                 data['results'].forEach(function (message) {
                     if (id !== message['user_id']) {
                         $('#chat').append(
-                            `<li>
+                            `<li style="justify-content: flex-end">
                             <img src="../../static/img/avatars/user.svg" alt="avatar">
-                                <div class="content">
+                                <div class="content" style="text-align: right;">
                                     <div class="message">
                                         <div class="bubble">
                                             <p>${message['message']}</p>
@@ -53,7 +53,7 @@ $(document).ready(function () {
                     } else {
                         $('#chat').append(
                             `<li>
-                                <div class="content">
+                                <div class="content" style="text-align: left;">
                                     <div class="message">
                                         <div class="bubble">
                                             <p>${message['message']}</p>
@@ -85,8 +85,7 @@ $(document).ready(function () {
             success: function(data){
                      chatSocket.send(JSON.stringify({
                     'message':data['message'],
-                    'created':data['created'].substring(0, 10),
-                    'class': 'asd'
+                    'created':data['created'].substring(0, 10)
                 }));
                 $('#message').val('');
             },

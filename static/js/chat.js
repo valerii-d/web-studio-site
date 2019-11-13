@@ -95,4 +95,8 @@ $(document).ready(function () {
         });
 
     });
+    $('.open-side-bar').click((e) => {
+        e.preventDefault();
+        $('#chat-close').removeClass('open');
+    })
 });

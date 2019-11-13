@@ -7,9 +7,9 @@
 	<title>Chat</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 	<meta name="description" content="#">
-	<link href="{% static 'css/lib/bootstrap.min.css' %}" type="text/css" rel="stylesheet">
 	<link href="{% static 'css/swipe.min.css' %}" type="text/css" rel="stylesheet">
-	<link href="{% static 'img/favicon.png' %}" type="image/png" rel="icon">
+	<link rel="stylesheet" href="{% static 'css/font-awesome.min.css' %}">
+	<link rel="icon" href="{% static 'img/favicon.ico' %}" type="image/x-icon">
 </head>
 
 <body style="overflow: hidden;">
@@ -53,7 +53,7 @@
 			</div>
 		</div>
 		<!-- Start of Chat -->
-		<div class="chat">
+		<div class="chat" id="chat-close">
 			<div class="tab-content">
 				<div class="tab-pane fade show active" id="chat1" role="tabpanel">
 					<div class="item">
@@ -67,6 +67,9 @@
 											<span>{{admin.last_name}}</span>
 										</div>
 									</div>
+										<button type="submit" class="btn prepend open-side-bar" style="margin-right:2%;position:relative;">
+											<i data-eva="arrowhead-left"></i>
+										</button>
 								</div>
 							</div>
 							<div class="middle" id="scroll">

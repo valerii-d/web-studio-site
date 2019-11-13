@@ -15,7 +15,9 @@ $(document).ready(function () {
                     </div>
                     <span>${data['created'].substring(0, 10)}</span>
                 </div>
-        </li>`);
+            </li>`
+        );
+        document.location.reload(true);
     }
     $('.contact').click(function (e) {
         e.preventDefault();
@@ -39,9 +41,9 @@ $(document).ready(function () {
                 data['results'].forEach(function (message) {
                     if (id !== message['user_id']) {
                         $('#chat').append(
-                            `<li style="justify-content: flex-end">
+                            `<li>
                             <img src="../../static/img/avatars/user.svg" alt="avatar">
-                                <div class="content" style="text-align: right;">
+                                <div class="contentRevers">
                                     <div class="message">
                                         <div class="bubble">
                                             <p>${message['message']}</p>
@@ -53,7 +55,7 @@ $(document).ready(function () {
                     } else {
                         $('#chat').append(
                             `<li>
-                                <div class="content" style="text-align: left;">
+                                <div class="content"">
                                     <div class="message">
                                         <div class="bubble">
                                             <p>${message['message']}</p>
@@ -91,5 +93,6 @@ $(document).ready(function () {
             },
             dataType: 'json',
         });
+
     });
 });

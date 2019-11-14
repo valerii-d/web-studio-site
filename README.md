@@ -18,47 +18,38 @@ Web studio site
 1. [start the Redis](https://www.techomoro.com/how-to-run-redis-on-windows-10/)
 1. ```python manage.py runserver```
 ## About site 🤔
-## 
+The developed information system application should perform all
+set functional tasks, namely:
+
+- authorization of site manager and administrator;
+- the ability to appoint a site manager;
+- user registration and authorization;
+- the ability to place an order from the user's personal account;
+- the ability to communicate with the manager or administrator via chat;
+- the ability to display detailed information about the order;
+- the possibility of assigning the status of development;
+- the ability to change the status of payment for the order;
+- the ability to set the price of the order;
+- possibility of unloading and loading of ready.
 ## Team 
-|![avatar1](https://avatars0.githubusercontent.com/u/46842062?s=400&v=4) |![avatar2](https://avatars1.githubusercontent.com/u/55995348?s=400&v=4) |![avatat3](https://avatars0.githubusercontent.com/u/48585734?s=400&v=4) | | |
+|![avatar1](https://avatars0.githubusercontent.com/u/46842062?s=400&v=4) |![avatar2](https://avatars1.githubusercontent.com/u/55995348?s=400&v=4) |![avatat3](https://avatars0.githubusercontent.com/u/48585734?s=400&v=4) |!['avatar4'](https://avatars1.githubusercontent.com/u/49763283?s=400&v=4) |!['avatar5'](https://avatars0.githubusercontent.com/u/56899790?s=400&v=4) |
 |----------------|------------------ | ------------------|---------------- |---------------------- |
-| *Pavel Andreyev* | *Valerii Druzhynin* | *Nikolay Orlovsky*  | *Marina Petrova*  | *Vyacheslav Yakymenko*  |
+| [Pavel Andreyev](https://github.com/PavelAndreyev1337) | [Valerii Druzhynin](https://github.com/valerii-d) | [Nikolay Orlovsky](https://github.com/nikolayOrl)  | [Marina Petrova](https://github.com/MarinnaPetrova)  | [Vyacheslav Yakymenko](https://github.com/yakkymenko)  |
 ## Our contacts ✉
-<a href="">
-    <img src="https://img.icons8.com/nolan/64/000000/facebook-new.png">
-</a>
-<a href="">
-    <img src="https://img.icons8.com/nolan/64/000000/twitter.png">
-</a>
-<a href="">
-    <img src="https://img.icons8.com/nolan/64/000000/linkedin.png">
-</a>
-<a href="">
-    <img src="https://img.icons8.com/nolan/64/000000/youtube-squared.png">
-</a>
 
-## Thanks for the icons 👍
+pavel.andreyev.98@gmail.com
+
+## Thanks for the icon 👍
+
 <ul>
-<li>
-    <a href="https://icons8.com/icon/69479/pied-piper">Pied Piper icon by Icons8</a>
-</li>
-<li>
-    <a href="https://icons8.com/icon/118501/facebook">Facebook icon by Icons8</a>
-</li>
-<li>
-    <a href="https://icons8.com/icon/44055/twitter">Twitter icon by Icons8</a>
-</li>
-<li>
-    <a href="https://icons8.com/icon/44019/linkedin">LinkedIn icon by Icons8</a>
-</li>
-<li>
-    <a href="https://icons8.com/icon/63852/youtube-squared">YouTube Squared icon by Icons8</a>
-</li>
+    <li>
+        <a href="https://icons8.com/icon/69479/pied-piper">Pied Piper icon by Icons8</a>
+    </li>
 </ul>
-
 
 ## FAQ ❓
 ### How to participate in the development of the project?
+
 1. communicate with the current team
 1. make a pull request.
 
